@@ -15,12 +15,12 @@ def fetch_price_series(
         ticker,
         period=period,
         interval=interval,
-        auto_adjust=True,
-        progress=False,
+        auto_adjust=True, # prices are adjusted for splits/dividends
+        progress=False, # doesn't display download progress bar
     )
     # Grab the Close column (may be a one-col DataFrame) and squeeze to 1-D
     close = df["Close"]
-    s = close.squeeze()          # turns single-column DataFrame into Series
+    s = close.squeeze() # turns single-column DataFrame into Series
     s.name = ticker
     s.index.name = "Datetime"
     return s

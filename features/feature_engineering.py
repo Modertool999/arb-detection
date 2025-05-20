@@ -4,7 +4,7 @@ def add_spread_features(
     z_thresh: float = 2.0
 ):
     df = df.copy()
-    # convert pence→GBP, apply ADR ratio, then GBP→USD
+    # convert pence to GBP, apply ADR ratio, then GBP to USD
     df["Close_UK_GBP"] = df["Close_UK"] / 100.0
     ADR_RATIO = 5
     df["Close_UK_USD"] = df["Close_UK_GBP"] * df["FX"] * ADR_RATIO

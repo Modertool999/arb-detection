@@ -1,9 +1,10 @@
-from flask import Flask, jsonify, request
+# file: app.py
+from flask import Flask, jsonify, request, send_from_directory
 from loaders.data_loader import load_cross_listed
 from features.feature_engineering import add_spread_features
 from models.backtest import backtest_spread
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 
 
 class APIError(Exception):
@@ -25,7 +26,7 @@ def handle_api_error(error):
 
 @app.errorhandler(Exception)
 def handle_exception(error):
-    # Log the error here as needed
+    # You can log the error details here for debugging
     response = jsonify({'error': 'Internal server error'})
     response.status_code = 500
     return response
@@ -46,6 +47,14 @@ def parse_params():
     except ValueError as e:
         raise APIError(f'Invalid query parameter: {e}', 400)
     return ticker_us, ticker_uk, period, interval, window, z_thresh
+
+
+@app.route('/')
+def serve_index():
+    """
+    Serve the frontend dashboard index.html from the static folder.
+    """
+    return send_from_directory(app.static_folder, 'index.html')
 
 
 @app.route('/scan')

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# test for git config
+# test for git config (changed email)
 """
 cross_listed_arbitrage.py
 

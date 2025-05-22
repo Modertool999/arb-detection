@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+
+# test for git config
 """
 cross_listed_arbitrage.py
 
@@ -9,6 +11,8 @@ computes the spread and its rolling z-score, and flags arbitrage signals.
 
 import pandas as pd
 from collectors.yahoo import fetch_price_series
+
+
 
 def main():
     # 1. Fetch each series (daily bars for guaranteed alignment)
